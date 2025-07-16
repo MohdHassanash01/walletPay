@@ -1,0 +1,27 @@
+# Environment variables
+.env
+
+# Node modules
+node_modules/
+
+# TypeScript build output
+dist/
+
+# Logs
+logs
+*.log
+
+# Optional: OS & Editor junk
+.DS_Store
+.vscode/
+*.swp
+
+# Optional: PM2 logs
+pids
+*.pid
+*.seed
+
+# Optional: dotenv override file
+.env.local
+.env.production
+.env.development
