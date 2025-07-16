@@ -34,7 +34,7 @@ function Users() {
 
   useEffect(() => {
     async function getUsers() {
-      const res = await axios.get(`${apiUrl}/users`);
+      const res = await axios.get(`${apiUrl}/api/v1/users`);
       setUsers(res.data.users);
       setLoading(false);
     }
@@ -43,7 +43,7 @@ function Users() {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}/users?filter=` + filter)
+      .get(`${apiUrl}/api/v1/users?filter=` + filter)
       .then((res) => {
         setFilterUser(res.data.users);
         setError("");
@@ -106,7 +106,7 @@ function User({ user }: UserProps) {
           setWalletExists(false);
           return;
         }
-        await axios.get(`${apiUrl}/balance`, {
+        await axios.get(`${apiUrl}/api/v1/balance`, {
           headers: { token },
         });
         setWalletExists(true);

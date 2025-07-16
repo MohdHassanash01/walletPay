@@ -25,7 +25,7 @@ export function SendMoney (){
        const token = localStorage.getItem("token")
 
         const amount = amountRef.current?.value
-      const res =  await axios.post(`${apiUrl}/transfer`,{
+      const res =  await axios.post(`${apiUrl}/api/v1/transfer`,{
             amount, 
             to:id
         },{

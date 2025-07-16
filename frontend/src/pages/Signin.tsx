@@ -26,7 +26,7 @@ export function Signin(){
 
  try {
   
-      const res = await   axios.post(`${apiUrl}/signin`,{
+      const res = await   axios.post(`${apiUrl}/api/v1/signin`,{
             email,
             password
         })

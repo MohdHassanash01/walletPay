@@ -144,7 +144,7 @@ function Transaction() {
       
       try {
         const res = await axios.post(
-          `${apiUrl}/transaction`,
+          `${apiUrl}/api/v1/transaction`,
           {},
           {
             headers: {

@@ -18,7 +18,7 @@ export function Profile() {
   async function getUserDetail(){
 
     const token = localStorage.getItem("token")
-  const res = await  axios.get(`${apiUrl}/detail`,{
+  const res = await  axios.get(`${apiUrl}/api/v1/detail`,{
     headers:{
       token
     }

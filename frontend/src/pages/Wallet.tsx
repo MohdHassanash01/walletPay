@@ -21,7 +21,7 @@ try {
   
       const token = localStorage.getItem("token")
 
-     const res = await  axios.post(`${apiUrl}/wallet`,{
+     const res = await  axios.post(`${apiUrl}/api/v1/wallet`,{
       phoneNo,
       amount
   },{

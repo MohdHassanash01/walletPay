@@ -15,7 +15,7 @@ function Balance() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await axios.get(`${apiUrl}/balance`, {
+        const res = await axios.get(`${apiUrl}/api/v1/balance`, {
           headers: {
             token,
           },
