@@ -1,8 +1,11 @@
-import { useEffect } from "react"
+import { useEffect, type ReactNode } from "react"
 import { useNavigate } from "react-router-dom"
 
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
 
-function ProtectedRoute({children}) {
+function ProtectedRoute({children}:ProtectedRouteProps) {
 
     const token = localStorage.getItem("token")
     const navigate = useNavigate()
