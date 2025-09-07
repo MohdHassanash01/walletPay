@@ -30,9 +30,9 @@ export async  function signin(req:Request,res:Response){
         const result = signInSchema.safeParse(req.body)
 
          if (!result.success) {
-          res.send({
-            message:"Incorrect Format", 
-            error:result.error.issues[0].message
+          res.status(411).send({
+            error:"Incorrect Format", 
+            message:result.error.issues[0].message
         })
 
         return
@@ -87,8 +87,8 @@ export async  function signin(req:Request,res:Response){
            console.error(error);  // Log the error for debugging
 
        res.status(500).send({
-        message:`Internal server error `,
-        error: error.message,
+        error:`Internal server error `,
+        message: error.message,
         success: false
        }) 
 

@@ -22,7 +22,7 @@ export function SideBar(){
        
     </div>
 
-  <div className="pt-54">
+  <div className="pt-46">
        <SmallSidebarItem Icon={UserPen  } title="Profile" url="/profile"/>
   </div>
     
@@ -36,7 +36,7 @@ export function SideBar(){
 
 
 
-    <aside className="w-56 lg:sticky absolute top-0 overflow-y-auto pb-2 lg:flex px-2 flex-col gap-2  hidden pt-4 h-fit border-r-1 border-neutral-600 ">
+    <aside className="w-56 lg:sticky absolute top-0 overflow-y-auto pb-2 lg:flex px-2 flex-col gap-2  hidden pt-4  border-r-1 border-neutral-600 ">
 
 <div >
 
@@ -54,7 +54,7 @@ export function SideBar(){
 
 </div>
 
-<div className="pt-74 px-2 ">
+<div className="pt-70 px-2 ">
     <LargeSidebarItem Icon={UserPen} title="Profile" url="/profile"/>
 </div>
 

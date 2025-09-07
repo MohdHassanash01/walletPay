@@ -6,19 +6,21 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 
     const signupShema = z.object({
+
      email:z.string()
     .nonempty({ message: "Email is required" })
         .min(6, { message: "Email must be at least 6 characters long" })
         .max(320, { message: "Email must be less than 320 characters" })
         .email({ message: "Please enter a valid email address" }),
 
-        firstName: z.string().nonempty({message: "FirstName is required"})
-        .min(2, { message: "FirstName must be at least 6 characters long" })
-        .max(50,{ message: "FirstName must be at least 50 characters long" }),
+         firstName: z.string().nonempty({message: "firstName is required"})
+        .min(2, { message: "firstName must be at least 2 characters long" })
+        .max(50,{ message: "firstName must be at least 20 characters long" }),
 
-            lastName: z.string().nonempty({message: "LastName is required"})
-        .min(2, { message: "LastName must be at least 6 characters long" })
-        .max(50,{ message: "LastName must be at least 50 characters long" }),
+        lastName: z.string().nonempty({message: "lastName is required"})
+        .min(2, { message: "lastName must be at least 2 characters long" })
+        .max(50,{ message: "lastName must be at least 20 characters long" }),
+
 
         password: z.string()
              .nonempty({ message: "Password is required" })
@@ -45,9 +47,9 @@ export async  function signup(req:Request,res:Response){
         const result = signupShema.safeParse(req.body)
 
          if (!result.success) {
-          res.status(400).send({
-            message:"Incorrect Format", 
-            error:result.error.issues[0].message
+          res.status(411).send({
+            error:"Incorrect Format", 
+            message:result.error.issues[0].message
         })
 
         return
@@ -63,7 +65,7 @@ export async  function signup(req:Request,res:Response){
 
         if (existUser) {
             
-            res.status(409).send({
+            res.status(403).send({
                  message:"user is already exists in our database",
                 success: false
             })
@@ -108,8 +110,8 @@ export async  function signup(req:Request,res:Response){
            console.error(error);  // Log the error for debugging
 
        res.status(500).send({
-        message:`Internal server error `,
-        error: error.message,
+        error:`Internal server error `,
+        message: error.message,
         success: false
        }) 
 

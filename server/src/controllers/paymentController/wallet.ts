@@ -43,6 +43,7 @@ const wallet = async (req: Request, res: Response) => {
     if (wallet) {
 
          res.status(200).json({
+          success: true,
       message: "Wallet created succesfully",
       wallet
     })
@@ -52,12 +53,16 @@ const wallet = async (req: Request, res: Response) => {
 
  
 
-   }catch(e){
-    console.log(e);
-    res.status(500).json({
-      message: "Internal Server Error"
-    })
-    return;
+   }catch(error:any){
+ 
+       console.error(error);  // Log the error for debugging
+
+      res.status(500).send({
+        error:`Internal server error `,
+        message: error.message,
+        success: false
+       })
+
    }
 }
 

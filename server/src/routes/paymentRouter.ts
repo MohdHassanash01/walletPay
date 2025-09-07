@@ -9,7 +9,7 @@ import wallet from "../controllers/paymentController/wallet"
 
 export const paymentRouter = Router()
 
-paymentRouter.get("/users",findUser)
+paymentRouter.get("/users",authMiddleware,findUser)
 
 paymentRouter.get("/balance",authMiddleware,balance)
 

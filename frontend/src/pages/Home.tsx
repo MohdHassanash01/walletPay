@@ -2,6 +2,7 @@
 import { FaCheck } from "react-icons/fa";
 import { FaGreaterThan } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
+import Footer from "../components/Footer";
 export function Home(){
   return (
     <>
@@ -28,10 +29,6 @@ export function Home(){
                 employees. Never run out of working capital.
             </p>
 
-            <button
-            className="bg-[#2b84ea] text-white  py-[14px] px-[18px] rounded-md font-mullish font-bold
-            hover:bg-[#0b72e7] transition-all duration-200"
-            >Sign Up Now </button>
 
         </div>
 
@@ -837,100 +834,8 @@ className='font-mullish font-bold text-[#4b94ed] group-hover:text-[#0b72e7] tran
 </section>
 
 
-{/* join  razorpay section */}
 
-<section className='relative bg-[#f5f8fe] pt-40 pb-12 -mt-[200px] -z-[100] '>
-
-    <div className='w-11/12 max-w-[1080px] mx-auto relative flex flex-col md:flex-row'>
-        {/* left  */}
-
-        <div className='flex flex-col justify-center lg:max-w-[calc(100%-500px)] w-full'>
-            <h1 className='font-mullish font-bold text-2xl text-[#162f56]'>join the 50,00,000+ buninesses using Razorpay</h1>
-            <div className="w-8 mt-4 mb-10 h-1 bg-[#61cea6] "></div>
-
-            <p className='font-mullish text-gray-800 opacity-80'>we make it easier for you to focus on building great products while we work on simplifying your payments. Because on of us by joining thousand of our happy users and simplify the online payment for your customers.</p>
-
-            <p className='font-mullish mt-8 opacity-80 text-[#162f56] font-semibold'>Focus on your business while we handle the complexities of payments for you.</p>
-        </div>
-
-        {/* right  */}
-
-        <div className='lg:h-[470px] w-[500px]relative overflow-hidden'>
-            <div
-            className="absolute hidden md:block w-full h-[150px] top-0 bg-gradient-to-b from-[#f4f8ff] to-[#fff0] z-[100]"
-            ></div>
-
-            <img src="./images/comanies.png" alt="" 
-            width="500px"
-            className='absolute h-full object-cover lg:w-[500px] lg:block w-full hidden' />
-           
-           
-        </div>
-    </div>
-</section>
-
-
-
-
-
-{/* CTA  */}
-
-<section className='bg-[url(./images/CTABg.svg)] w-full h-full bg-no-repeat bg-cover relative pb-10 '>
-    {/* main content box  */}
-
-<div className='w-11/12 max-w-[1080px] relative flex flex-row items-center justify-center space-x-20 mx-auto'>
-    {/* left part  */}
-
-    <div className='relative mt-[140px] mb-24 flex flex-col gap-6 max-w-[600px]'>
-        <h2 className='font-mullish font-bold text-2xl text-white'>Supercharge your business with Razorpay</h2>
-
-        <div className="w-8 my-4 h-1 bg-[#61cea6] "></div>
-
-        <p className='font-mullish text-white'>Sign up now to experience the future of payments and offer <br /> your customers the best checkout experience.</p>
-
-
-        <ul className='flex flex-row gap-x-11  text-white flex-wrap gap-y-3'>
-
-        <li className='font-mullish flex items-center space-x-2'>            
-        <i className='text-[#61cea6]'><FaCheck /></i>
-        <span>Quick onboarding</span>
-        </li>
-
-        <li className='font-mullish flex items-center space-x-2'>            
-        <i className='text-[#61cea6]'><FaCheck /></i>
-        <span>Access to entire product suite</span>
-        </li>
-
-
-        <li className='font-mullish flex items-center space-x-2'>            
-        <i className='text-[#61cea6]'><FaCheck /></i>
-        <span>Api access</span>
-        </li>
-
-
-        <li className='font-mullish flex items-center space-x-2'>            
-        <i className='text-[#61cea6]'><FaCheck /></i>
-        <span>24x7 support</span>
-        </li>
-
-
-        </ul>
-
-        <button className='min-w-[32px] font-mullish text-sm font-bold bg-white text-[#4b94ed] border flex rounded-sm items-center hover:text-[#0b72e7] transition-all duration-200 py-3 px-4 w-fit'>
-        Sign Up
-            <FaArrowRight className='ml-3'/>
-        </button>
-
-     
-    </div>
-
-   {/* right part  */}
-
-   <img src="./images/ctaImg.svg" alt="" width="240px" height="282px" className='mt-20 hidden xl:block'/>
-
-</div>
-
-</section>
+<Footer/>
 
 
 

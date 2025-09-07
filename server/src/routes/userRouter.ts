@@ -38,11 +38,11 @@ userRouter.get("/detail",authMiddleware, async function(req,res){
 
          console.error(error);  // Log the error for debugging
 
-       res.status(500).send({
-        message:`Internal server error `,
-        error: error.message,
+    res.status(500).send({
+        error:`Internal server error `,
+        message: error.message,
         success: false
-       }) 
+       })  
     
   }
 

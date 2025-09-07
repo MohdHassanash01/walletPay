@@ -27,18 +27,22 @@ export async function balance (req:Request,res:Response){
       }else{
 
         res.status(200).json({
+          success: true,
         balance: user.balance
       })
       return;
 
       }
 
-    } catch (error) {
+    } catch (error:any) {
         
-              res.status(500).json({
-        message: "Internal Server Error"
-      })
-      return;
+        console.error(error);  // Log the error for debugging
+
+       res.status(500).send({
+        error:`Internal server error `,
+        message: error.message,
+        success: false
+       }) 
 
     }
 

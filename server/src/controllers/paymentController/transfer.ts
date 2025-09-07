@@ -73,12 +73,23 @@ export async function transfer(req: Request, res: Response) {
     await session.commitTransaction();
     session.endSession();
 
-    return res.status(200).json({ message: "Transfer successful" });
+    return res.status(200).json({
+      success: true,
+       message: "Transfer successful" });
 
-  } catch (error) {
+  } catch (error:any) {
+
     console.error("Transfer failed:", error);
+
     await session.abortTransaction();
     session.endSession();
-    return res.status(500).json({ message: "Internal Server Error" });
+    
+      res.status(500).send({
+        error:`Internal server error `,
+        message: error.message,
+        success: false
+       }) 
+    
+
   }
 }
