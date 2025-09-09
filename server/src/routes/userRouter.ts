@@ -5,6 +5,7 @@ import { signin } from "../controllers/authController/signin";
 import { authMiddleware } from "../middlewares/user.middleware";
 import { userModel } from "../models/user.model";
 import { walletModel } from "../models/account.model";
+import { success } from "zod";
 
 export const userRouter = Router()
 
@@ -24,12 +25,15 @@ userRouter.get("/detail",authMiddleware, async function(req,res){
       const userWallet = await walletModel.findOne({userId})
 
       if (user) {
-        res.json({
-            email: user.email,
+        res.status(200).json({
+          success: true,
+           userDetail: {
+             email: user.email,
             firstName: user.firstName,
             lastName:user.lastName,
             Phone_no: userWallet?.phone_No,
             balance: userWallet?.balance
+           }
         })
 
         return
