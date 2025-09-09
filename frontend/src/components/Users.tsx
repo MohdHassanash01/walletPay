@@ -32,18 +32,28 @@ function Users() {
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function getUsers() {
-      const res = await axios.get(`${apiUrl}/api/v1/users`);
+
+
+     async function getUsers() {
+      const res = await axios.get(`${apiUrl}/api/v1/users`,{
+        headers:{
+          token
+        }
+      });
       setUsers(res.data.users);
       setLoading(false);
     }
-    getUsers();
-  }, []);
 
-  useEffect(() => {
-    axios
-      .get(`${apiUrl}/api/v1/users?filter=` + filter)
+
+
+
+ async function handleFilter(){
+
+     await axios.get(`${apiUrl}/api/v1/users?filter=${filter}`,{
+      headers:{
+        token
+      }
+     })
       .then((res) => {
         setFilterUser(res.data.users);
         setError("");
@@ -53,6 +63,15 @@ function Users() {
           setError(error.response?.data.message);
         }
       });
+  }
+
+    useEffect(() => {
+    getUsers();
+  }, []);
+
+
+  useEffect(() => {
+   handleFilter()
   }, [filter]);
 
   return (

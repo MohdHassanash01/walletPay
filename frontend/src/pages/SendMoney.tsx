@@ -4,6 +4,7 @@ import axios from "axios";
 
 import {  X } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -25,7 +26,12 @@ export function SendMoney (){
        const token = localStorage.getItem("token")
 
         const amount = amountRef.current?.value
-      const res =  await axios.post(`${apiUrl}/api/v1/transfer`,{
+        if (!amount || Number(amount) <= 0) {
+  toast.error("Please enter a valid amount");
+  return;
+}
+
+      const {data} =  await axios.post(`${apiUrl}/api/v1/transfer`,{
             amount, 
             to:id
         },{
@@ -34,10 +40,20 @@ export function SendMoney (){
            }
         })
 
-        console.log(res.data);
-        setError("")
-        setData(res.data.message)
-            if (amountRef.current) amountRef.current.value = "";
+        console.log(data);
+
+        if (data.success) {
+           setError("")
+        setData(data.message)
+
+        toast.success(data.message)
+
+         if (amountRef.current) amountRef.current.value = "";
+
+        }
+
+       
+
 
   } catch (error) {
       if (axios.isAxiosError(error)) {

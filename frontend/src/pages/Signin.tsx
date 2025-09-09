@@ -33,7 +33,7 @@ export function Signin(){
             password
         })
 
-        console.log(data);
+        // console.log(data);
         
         if (data.success) {
           localStorage.setItem("token",data.token)
@@ -62,7 +62,7 @@ export function Signin(){
       
             // for navigate to home page
       const token = localStorage.getItem("token")
-      console.log(token);
+      // console.log(token);
       
       useEffect(() => {
         if (token) navigate("/")

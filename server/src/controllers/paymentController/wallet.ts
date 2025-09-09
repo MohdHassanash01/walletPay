@@ -1,5 +1,6 @@
 import { Response,Request } from "express"
 import { walletModel } from "../../models/account.model";
+import { success } from "zod";
 
 
 
@@ -20,7 +21,6 @@ const wallet = async (req: Request, res: Response) => {
     }
 
     const user = await walletModel.findOne({
-     phone_No:phoneNo,
      userId:userId
     })
 
@@ -29,6 +29,7 @@ const wallet = async (req: Request, res: Response) => {
 
     if(user){
       res.status(404).json({
+        success:false,
         message: "User already has a wallet"
       })
       return;
