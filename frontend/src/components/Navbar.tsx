@@ -1,14 +1,12 @@
 import { Menu, UserPen } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UseLogin } from "../context/LoginContext";
 
 export function Navbar(){
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
+const navigate = useNavigate();
+
+const { isLoggedIn, logout } = UseLogin();
 
   return (
     <>
@@ -36,18 +34,20 @@ export function Navbar(){
 
   <div className="flex flex-shrink-0 md:gap-4 gap-2">
 
-     <Link to="/profile" className="bg-gradient-to-r from-blue-400 to-blue-800 py-2 px-3 rounded-md">
-     <span className="flex gap-3 text-sm justify-center items-center">
+     <Link to="/profile" className="bg-gradient-to-r from-blue-400 to-blue-800 py-2 px-3 rounded-md flex gap-2">
+     
       <UserPen size={18}/>
-      Profile</span></Link>
+      Profile</Link>
 
-      {isLoggedIn ? <Link 
+      {isLoggedIn ? 
+      <Link 
       onClick={() => {
-        localStorage.removeItem("token")
+        logout()
+        navigate("/")
       }}
-      to="/" className="bg-gradient-to-r from-blue-400 to-blue-800 py-2 px-3 rounded-md">logout</Link>:
+      to="/" className="bg-gradient-to-r from-blue-400 to-blue-800 py-2 px-3 rounded-md">Logout</Link>:
 
-      <Link to="/signin" className="bg-gradient-to-r from-blue-400 to-blue-800 py-2 px-3 rounded-md text-sm">Sign In</Link>}
+      <Link to="/signin" className="bg-gradient-to-r from-blue-400 to-blue-800 flex justify-center items-center px-3 rounded-md text-sm">Sign In</Link>}
 
       
 

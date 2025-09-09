@@ -10,7 +10,8 @@ const walletSchema = new mongoose.Schema({
     balance: {
         type: Number,
         required: true,
-        
+         default: 0,
+         min: 0 //
     },
     phone_No:{
         type:String,

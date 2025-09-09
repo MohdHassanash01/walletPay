@@ -2,9 +2,10 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
-console.log("API Base URL:", apiUrl);
+
 
 export function Signup(){
 
@@ -28,29 +29,30 @@ export function Signup(){
 
  try {
   
-      const res = await   axios.post(`${apiUrl}/api/v1/signup`,{
+      const {data} = await   axios.post(`${apiUrl}/api/v1/signup`,{
             email,
             firstName,
             lastName,
             password
         })
 
-        console.log("response : ",res.data);
-        const token = res.data.token
-
-        if (token) {
-        localStorage.setItem("token",res.data.token)
-
-        navigate("/")
-        }
-
-        setLoading(false)
+              console.log(data);
+              
+              if (data.success) {
+                localStorage.setItem("token",data.token)
+                 toast.success(data.message);
+                navigate("/")
+              }
 
  } catch (error) {
 
    if (axios.isAxiosError(error)) {
-        setError( error.response?.data.error );
+    console.log(error);
+    
+        setError( error.response?.data.message );
       } 
+ }finally{
+  setLoading(false)
  }
    
       }
@@ -60,9 +62,10 @@ export function Signup(){
       const token = localStorage.getItem("token")
       console.log(token);
       
+
       useEffect(() => {
         if (token) navigate("/")
-            },[token])
+            },[navigate])
 
     return (
         <>
@@ -70,7 +73,7 @@ export function Signup(){
        <div className="flex flex-col justify-center sm:h-screen p-4">
 
 
-      <div className="max-w-md w-full mx-auto border border-gray-300 rounded-2xl p-8">
+      <div className="max-w-md w-full mx-auto border border-gray-300 rounded-2xl px-8 py-4">
 
         <div className="text-center mb-3 font-bold text-2xl bg-gradient-to-r from-blue-300 to-blue-800 bg-clip-text text-transparent">
          SignUp 
@@ -128,7 +131,7 @@ export function Signup(){
 
 
 
-          <div  className="mt-12">
+          <div  className="mt-8">
             <button 
             
             onClick={handleSignup}
@@ -142,6 +145,7 @@ export function Signup(){
         </form>
 
       </div>
+
     </div> 
        
         </>

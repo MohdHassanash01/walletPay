@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -17,6 +18,7 @@ export function Signin(){
      const [error, setError] = useState(null)
       const [loading, setLoading] = useState(false);
 
+
       async function handleSignin(){
 
         const email = emailRef.current?.value
@@ -26,20 +28,18 @@ export function Signin(){
 
  try {
   
-      const res = await   axios.post(`${apiUrl}/api/v1/signin`,{
+      const {data} = await   axios.post(`${apiUrl}/api/v1/signin`,{
             email,
             password
         })
 
-        console.log("response : ",res.data.token);
-     
-        const token = res.data.token
-        if (token) {
-        localStorage.setItem("token",res.data.token)
-        navigate("/")
+        console.log(data);
+        
+        if (data.success) {
+          localStorage.setItem("token",data.token)
+           toast.success(data.message);
+          navigate("/")
         }
-       
-        setLoading(false)
 
  } catch (error) {
 
@@ -47,21 +47,26 @@ export function Signin(){
 
     console.log(error.response?.data.message);
     
-
         setError( error.response?.data.message );
+
       } 
       
+ }finally{
+
+  setLoading(false)
+
  }
    
       }
 
+      
             // for navigate to home page
       const token = localStorage.getItem("token")
       console.log(token);
       
       useEffect(() => {
         if (token) navigate("/")
-            },[token])
+            },[navigate])
 
 
     return (
@@ -119,7 +124,7 @@ export function Signin(){
             
             onClick={handleSignin}
             type="button"  className={`w-full py-3 px-4 text-sm tracking-wider font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer ${loading ? "opacity-70 cursor-not-allowed":"cursor-pointer"}`}>
-             {loading ? 'Creating account...' : 'Create an account'}
+             {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </div>
 

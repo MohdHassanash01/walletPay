@@ -11,15 +11,15 @@ import { Navbar } from "./components/Navbar"
 import  Wallet  from "./pages/Wallet"
 import { Profile } from "./pages/Profile"
 import Transaction from "./pages/Transaction"
-import ProtectedRoute from "./components/ProtectedRoute"
+import ProtectedRoute from "./lib/ProtectedRoute"
+import LoginProvider from "./context/LoginContext"
+import { ToastContainer } from "react-toastify"
 function App() {
   return (
     <>
     <BrowserRouter>
     
     <Routes>
-
-     
 
 <Route path="/signup" element={<Signup/>} />
 <Route path="/signin" element={<Signin/>} />
@@ -51,15 +51,25 @@ function App() {
   <Transaction/>
 </ProtectedRoute>} />
 
-
 </Route>
 
  {/* Catch-all Route */}
 <Route path="*" element={<Navigate to="/" replace />} />
 
-    </Routes>
+</Routes>
 
-    </BrowserRouter>
+ <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+      />
+
+</BrowserRouter>
+
     </>
   )
 }
@@ -70,9 +80,11 @@ export default App
 function Layout(){
     return (
     <>
+
+<LoginProvider>
+
 <div className="max-h-screen flex flex-col">
 <Navbar/>
-
 <div className='grid grid-cols-[auto_1fr]  overflow-auto flex-grow-1'>
 
 <SideBar/>
@@ -80,12 +92,14 @@ function Layout(){
 <div className="w-full h-screen ">
 
 {<Outlet/>}
-</div>
-</div>
-</div>
-     
-</>
 
+</div>
+</div>
+</div>
+
+</LoginProvider>
+
+</>
 
 )
 }

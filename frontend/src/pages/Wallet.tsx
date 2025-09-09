@@ -1,11 +1,14 @@
 import axios from "axios"
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function Wallet() {
   const navigate = useNavigate()
+
+  const [loading, setloading] = useState(false)
   const [success,setsuccess] = useState()
   const [error, setError] = useState()
   const phoneRef = useRef<HTMLInputElement>(null)
@@ -13,6 +16,7 @@ function Wallet() {
 
  async  function walletAmount(){
 
+  setloading(true)
     const phoneNo = phoneRef.current?.value
     const amount = Number(amountRef.current?.value)
 
@@ -21,7 +25,7 @@ try {
   
       const token = localStorage.getItem("token")
 
-     const res = await  axios.post(`${apiUrl}/api/v1/wallet`,{
+     const {data} = await  axios.post(`${apiUrl}/api/v1/wallet`,{
       phoneNo,
       amount
   },{
@@ -30,8 +34,16 @@ try {
     }
   })
 
-  setsuccess(res.data.message)
+  console.log(data);
+  
+if (data.success) {
+ 
+    setsuccess(data.message)
+    toast.success(data.message)
+}
 
+
+  
 //   console.log("Phone ref:", phoneRef.current);
 // console.log("Amount ref:", amountRef.current);
 
@@ -55,6 +67,8 @@ setError(undefined);
 
       } 
       
+}finally{ 
+  setloading(false)
 }
 
   }
@@ -99,7 +113,7 @@ className="border-2 py-1 pl-3 rounded-md border-black text-black focus:border-2 
 <button 
 type="button"
 onClick={walletAmount}
-className="text-white bg-blue-500 py-2 rounded-lg mt-2 font-semibold">Add Information</button>
+className="text-white bg-blue-500 py-2 rounded-lg mt-2 font-semibold">{loading ? "Creating wallet....": "Add Information"}</button>
 
         </div>
        </div>
